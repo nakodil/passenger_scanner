@@ -4,42 +4,52 @@ passengers = [
     {
         "место": 0,
         "имя": "Питонов Василий Аспидович",
+        "проверен": False,
         "ручная кладь": ["ноутбук", "наушники"]
     },
     {
         "место": 1,
         "имя": "Блинохватов Прохор Аскольдович",
+        "проверен": False,
         "ручная кладь": ["книга", "четки", "беруши"]
     },
     {
         "место": 2,
         "имя": "Бабахин Капитон Кондратьевич",
+        "проверен": False,
         "ручная кладь": ["семечки", "граната", "кепка"]
     },
     {
         "место": 3,
         "имя": "Бескровная Таисия Ипатовна",
+        "проверен": False,
         "ручная кладь": ["журнал", "букет", "горсть земли"]
     },
     {
         "место": 4,
         "имя": "Аскетов Демьян Захарьевич",
+        "проверен": False,
         "ручная кладь": []
     }
 ]
 
 print("Пассажиров на проверке:", len(passengers), "\n")
 
+allowed_passengers = []
+
 for passenger in passengers:
+    passenger["проверен"] = True
     for item in passenger["ручная кладь"]:
         if item in restricted:
-            print("В ручной клади пассажира на месте", passenger["место"], "обнаружен запрещенный предмет", item)
-            print("Пассажир", passenger["имя"], "не допущен к вылету")
-            passengers.pop(passengers.index(passenger))
+            print("В ручной клади пассажира", passenger["имя"], "обнаружен запрещенный предмет", item, ". Пассажир не допущен к вылету.\n")
+            break
+    else:
+        print("Пассажир", passenger["имя"], "допущен к вылету\n")
+        allowed_passengers.append(passenger)
 
-print("\nДопущено к вылету пассажиров:", len(passengers), "\n")
+print("\nДопущено к вылету пассажиров:", len(allowed_passengers), "\n")
 
-for passenger in passengers:
+for passenger in allowed_passengers:
     for k, v in passenger.items():
         print(k, ":", v)
     print("")
